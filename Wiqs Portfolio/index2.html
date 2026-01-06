@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akinwunmi Wiqoyah- Graphics Designer Portfolio</title>
+    <!-- FIX: Load Tailwind CSS via CDN for universal compatibility -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Inter font -->
+     <link rel="stylesheet" href="styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Load Lucide icons and React -->
+    <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body class="w-full overflow-x-hidden">
+
+    <!-- Custom Success Modal for Form Submission -->
+    <div id="successModal" class="modal">
+        <div class="modal-content text-center max-w-sm">
+            <span class="close-btn" onclick="closeModal('successModal')">&times;</span>
+            <div id="modal-icon-success" class="mx-auto mb-4"></div>
+            <h3 class="text-2xl font-bold mb-2 text-sky-600">Brief Received!</h3>
+            <p class="text-gray-600">I'll review your project details and connect with you soon. Let's start the visual magic!</p>
+        </div>
+    </div>
+    
+    <!-- Case Study Modal for Projects -->
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('projectModal')">&times;</span>
+            <h3 id="modalTitle" class="text-3xl font-bold text-gradient mb-4">Project Title</h3>
+            <div class="text-sm mb-6 flex flex-wrap gap-3">
+                <span id="modalRole" class="bg-blue-100 text-blue-700 font-medium px-3 py-1 rounded-full">Discipline: Branding</span>
+                <span id="modalMedium" class="bg-blue-100 text-blue-700 font-medium px-3 py-1 rounded-full">Medium: Digital & Print</span>
+                <span id="modalTool" class="bg-blue-100 text-blue-700 font-medium px-3 py-1 rounded-full">Tool: Illustrator</span>
+            </div>
+            
+            <img id="modalImage" src="" alt="Project Image" class="rounded-xl mb-6 w-full shadow-lg">
+
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">The Creative Brief</h4>
+            <p id="modalChallenge" class="text-gray-700 mb-6 leading-relaxed">The client requested a new visual identity that felt [adjective 1] and [adjective 2], targeting a [specific demographic].</p>
+
+            <h4 class="text-xl font-semibold text-gray-800 mb-2">Visual Strategy & Execution</h4>
+            <p id="modalSolution" class="text-gray-700 mb-6 leading-relaxed">
+                I developed a color palette centered on [Key Color] and utilized [Typography Style] to convey the brand's message. The final artwork focuses on:
+                <span id="modalImpact" class="font-bold text-sky-500 block mt-2">Harmonizing Visuals with Brand Story.</span>
+            </p>
+            
+            <div class="text-center mt-6">
+                <a id="modalLink" href="#" target="_blank" class="btn-primary font-bold py-2 px-6 text-base inline-flex items-center gap-2 shine-parent">
+                    View Full Project Details
+                    <div id="modal-link-icon"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Navigation -->
+    <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 bg-opacity-80 backdrop-blur-md" style="background-color: rgba(240, 249, 255, 0.8);">
+        <nav class="container mx-auto max-w-7xl px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gradient">Akinwunmi Wiqoyah</a>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobileMenuBtn" class="md:hidden text-gray-800 z-50">
+                <div id="menu-icon-open"></div>
+                <div id="menu-icon-close" class="hidden"></div>
+            </button>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-gray-700 hover:text-sky-500 transition duration-300">About</a>
+                <a href="#projects" class="text-gray-700 hover:text-sky-500 transition duration-300">Portfolio</a>
+                <a href="#skills" class="text-gray-700 hover:text-sky-500 transition duration-300">Tools</a>
+                <a href="#contact" class="text-gray-700 hover:text-sky-500 transition duration-300">Contact</a>
+            </div>
+        </nav>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden fixed top-0 left-0 w-full h-full bg-sky-100 bg-opacity-95 backdrop-blur-lg flex flex-col items-center justify-center space-y-8 text-2xl transform -translate-x-full transition-transform duration-300 ease-in-out z-40">
+            <a href="#about" class="nav-link text-gray-800 hover:text-sky-600" onclick="document.getElementById('mobileMenuBtn').click()">About</a>
+            <a href="#projects" class="nav-link text-gray-800 hover:text-sky-600" onclick="document.getElementById('mobileMenuBtn').click()">Portfolio</a>
+            <a href="#skills" class="nav-link text-gray-800 hover:text-sky-600" onclick="document.getElementById('mobileMenuBtn').click()">Tools</a>
+            <a href="#contact" class="nav-link text-gray-800 hover:text-sky-600" onclick="document.getElementById('mobileMenuBtn').click()">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-7xl px-6">
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center relative pt-20">
+            <!-- Magical Background -->
+            <div class="absolute inset-0 z-0">
+                <ul class="hero-bg-orbs">
+                    <li></li> <li></li> <li></li> <li></li> <li></li>
+                    <li></li> <li></li> <li></li> <li></li> <li></li>
+                </ul>
+            </div>
+            
+            <!-- Background glow effect -->
+            <div class="absolute top-1/3 left-1/4 w-96 h-96 bg-sky-300 rounded-full opacity-30 filter blur-3xl z-0"></div>
+            <div class="absolute top-1/2 left-1/2 w-96 h-96 bg-blue-300 rounded-full opacity-30 filter blur-3xl z-0"></div>
+            
+            <div class="relative z-10">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-4">
+                    <span class="text-gradient">Crafting</span> Visual Stories.
+                </h1>
+                <h2 class="text-2xl md:text-4xl text-gray-700 mb-8 font-medium">
+                    I translate ideas into compelling visual experiences.
+                </h2>
+                <p class="max-w-2xl mx-auto text-lg text-gray-600 mb-12">
+                    Specializing in high-impact promotional graphics, social media assets, and print-ready materials like flyers and brochures.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="btn-primary font-bold py-3 px-8 text-lg transition duration-300 shine-parent">
+                        View Portfolio
+                    </a>
+                    <a href="#contact" class="btn-outline font-bold py-3 px-8 text-lg transition duration-300">
+                        Start a Project
+                    </a>
+                </div>
+            </div>
+            <!-- Scroll Down Arrow -->
+            <a href="#about" class="scroll-down-arrow text-gray-500 hover:text-sky-500" aria-label="Scroll down to about section">
+                <div id="scroll-down-icon"></div>
+            </a>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-24 md:py-32 scroll-animate">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">
+                My <span class="text-gradient">Creative Philosophy</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
+                <div class="md:col-span-2">
+                    <img src="aiFemalePicture.png" 
+                         alt="A professional photo of Your Name"
+                         class="rounded-3xl shadow-2xl w-full h-auto aspect-square object-cover"
+                         style="box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);">
+                </div>
+                <div class="md:col-span-3">
+                    <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+                        Hi I am <strong>Wiqs</strong>! I am a <strong>Graphics Designer</strong> committed to delivering purposeful design that communicates clearly and converts effectively. My process prioritizes speed and impact, translating marketing goals into visuals that capture attention.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-4 leading-relaxed">
+                        I specialize in visual systems for promotional campaigns, generating everything from stunning Instagram graphics to print-ready event flyers. I focus on optimizing assets for specific platform requirements and audience engagement.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-8 leading-relaxed">
+                        With primary expertise in <strong>Figma</strong> for rapid layout and component creation, and <strong>Canva</strong> for high-volume asset production and easy client handoff, I ensure quick turnaround times without compromising visual quality.
+                    </p>
+                    <a href="Wiqoyah cv.pdf" download class="btn-primary font-medium py-3 px-6 inline-flex items-center gap-2 shine-parent">
+                        Download CV
+                        <div id="download-icon"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-24 md:py-32 scroll-animate">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">
+                Featured <span class="text-gradient">Creative Work</span>
+            </h2>
+            <!-- Initial 3 Featured Projects -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1: Social Media Campaign -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 1: Seasonal Greeting"
+                     data-discipline="Digital Graphics"
+                     data-medium="Instagram, Facebook"
+                     data-tool="Figma, Canva"
+                     data-challenge="Design a cohesive, high-volume set of graphics for a festive product launch campaign across multiple social platforms to drive holiday engagement."
+                     data-solution="I developed a sparkling, celebratory aesthetic using festive decorative typography and brand-aligned accents. By creating reusable templates in Figma and Canva, I enabled a 40% increase in campaign click-through rates and a rapid rollout of over 100 high-quality assets."
+                     data-impact="Generated over 100 high-quality assets in 3 weeks, leading to a 40% increase in campaign click-through rate."
+                     data-image="ARBNewYear.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="ARBNewYear.jpeg" 
+                                 alt="Screenshot of Project One"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Seasonal Greeting</span>
+                                <span class="text-sm">ULES ARB 2025 New Year Greeting</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Seasonal Greeting Graphic</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Festive, sparkling design with decorative typography reinforcing brand identity.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Figma Templates</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Optimized Assets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: Event Flyer and Print Assets -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 2: Bespoke Event Invitation"
+                     data-discipline="Print & Promotional"
+                     data-medium="Flyers, Brochures"
+                     data-tool="Canva, Affinity Publisher"
+                     data-challenge="Design a set of eye-catching flyers and print materials for a personal event that demands a high-end feel."
+                     data-solution="I utilized a soft, sophisticated palette of pinks and purples to capture a joyful, celebratory tone. The execution focused on clear hierarchy and professional print specifications (CMYK, bleeds, and trim), contributing to a 25% increase in early-bird engagement."
+                     data-impact="The professional flyers contributed to a 25% increase in early-bird ticket sales."
+                     data-image="NamingCer.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="NamingCer.jpeg" 
+                                 alt="Screenshot of Project Two"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Bespoke Event Invitation</span>
+                                <span class="text-sm">Twins Naming Ceremony</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Personal Event Invitation</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Soft, personalized design featuring a pink/purple palette to capture a joyful and celebratory tone</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Flyer Design</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">CMYK & Specs</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 3: E-Book/Lead Magnet Layout -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 3: E-Book and Lead Magnet Design"
+                     data-discipline="Layout & Content Design"
+                     data-medium="Digital PDF"
+                     data-tool="Canva"
+                     data-challenge="Lay out a 20-page educational e-book for a SaaS company, making dense content visually accessible."
+                     data-solution="Utilized Canva's collaboration features to quickly integrate content updates. Designed a clean grid layout with custom color-coded chapter headers and internal graphics."
+                     data-impact="
+I implemented a clean grid layout with custom color-coded chapter headers and internal graphics. By focusing on readability and visual flow in Canva, the design boosted ticket sales by 18%."
+                     data-image="CrimVig.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="CrimVig.jpeg" 
+                                 alt="Screenshot of Project Three"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Content Design</span>
+                                <span class="text-sm">E-Book & Lead Magnet</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">E-Book & PDF Design</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Structuring long-form digital content into engaging, readable PDF and E-book formats.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Layout</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                            <span class="bg-gray-100 text-gray-700 text-xs font-medium px-3 py-1 rounded-full">Digital Assets</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extended Projects Section (Initially Hidden) -->
+            <div id="moreProjects" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+                <!-- Project Card 4: Instagram Stories Templates -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 4: Greeting Card"
+                     data-discipline="Digital & Motion"
+                     data-medium="Instagram Stories/Reels"
+                     data-tool="Canva"
+                     data-challenge="Create branded, dynamic vertical-first content and greeting cards for seasonal celebrations"
+                     data-solution="Leveraged Canva's basic animation and transition features for engaging, vertical-first content."
+                     data-impact="
+I leaned into a luxurious aesthetic featuring gold script and intricate geometric patterns to convey peace and prosperity. Leveraging Canva’s animation features, the dynamic visuals increased story engagement by 30%"
+                     data-image="EMSSEid.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="EMSSEid.jpeg" 
+                                 alt="Screenshot of Project Four"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Greeting Card</span>
+                                <span class="text-sm">Eid Mubarak</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Holiday Greeting Design</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Elegant, luxurious design using gold script and intricate geometric patterns to convey peace and prosperity.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Vertical Video</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card 5: Business Card & Stationery -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 5: Modern Business Card Design"
+                     data-discipline="Print Design"
+                     data-medium="Business Cards"
+                     data-tool="Figma"
+                     data-challenge="Design a minimalist, dual-sided business card for a professional service client."
+                     data-solution="
+I used Figma for precise vector work, focusing on high-contrast typography and clean lines. The final artwork was optimized for commercial printing with spot colors and cut lines, significantly elevating the client's networking presence."
+                     data-impact="Elevated the client's networking material, providing a premium feel."
+                     data-image="Savour9ja.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="Savour9ja.jpeg" 
+                                 alt="Screenshot of Project Five"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Stationery Design</span>
+                                <span class="text-sm">Business Card & Letterhead</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Business Card Set</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Creating elegant, print-ready identity assets that make a lasting impression.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Figma</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Vector Graphics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 6: Blog Post Headers -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 6: 12 Blog Post Header Images"
+                     data-discipline="Content Graphics"
+                     data-medium="Website"
+                     data-tool="Canva"
+                     data-challenge="Produce unique yet cohesive promotional headers and flyers for a series of professional webinars focusing on women in STEM."
+                     data-solution="I developed a striking 'torn paper' effect to draw immediate focus to the central career theme. By integrating abstract shapes and professional photography, I established a standardized visual brand that improved site professionalism across all blog and event content."
+                     data-impact="Standardized visual branding across all blog content, improving site professionalism."
+                     data-image="SWEWebinar.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="SWEWebinar.jpeg" 
+                                 alt="Screenshot of Project Six"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Webinar Promotion</span>
+                                <span class="text-sm">Career Talk for Women in STEM</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Webinar Promotion Flyer</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2"> Striking "torn paper" effect used to draw focus to the vital career theme.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Branding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 7: Pricing Page Graphics -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 7: Educational Event Flyer"
+                     data-discipline="UI/UX Graphics"
+                     data-medium="Website UI"
+                     data-tool="Figma"
+                     data-challenge="
+Design a high-impact, cohesive set of graphics and icons for an educational marathon tutorial to improve clarity for potential students."
+                     data-solution="
+The strategy centered on bold color contrast and clear segmentation of key event details. Using Figma, I created a clean icon library and layout that reduced confusion and improved student registration conversion by 5%."
+                     data-impact="Reduced confusion on pricing tiers and improved conversion by 5%."
+                     data-image="ARBTut.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="ARBTut.jpeg" 
+                                 alt="Screenshot of Project Seven"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Educational Event Flyer</span>
+                                <span class="text-sm">Marathon Exam Tutorials</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Educational Event Promotion</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">High-impact design with bold color contrast and clear segmentation of key event details.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Figma</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">UI Assets</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 8: Email Newsletter Banner -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 8: Product Showcase"
+                     data-discipline="Email Marketing"
+                     data-medium="Email"
+                     data-tool="Canva"
+                     data-challenge="Design an engaging and lightweight banner and infographic system to summarize complex product features for an anniversary showcase."
+                     data-solution="I focused on data clarity, using clean icons and a structured chart system to summarize eight key features. By using web-safe fonts and optimized compression, the design reduced bounce rates and improved visual appeal in clients."
+                     data-impact="Reduced email bounce rate and increased open rate through improved visual appeal."
+                     data-image="Tokenfi1.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="Tokenfi1.jpeg" 
+                                 alt="Screenshot of Project Eight"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Product Showcase</span>
+                                <span class="text-sm"> TokenFi 2-Year Anniversary</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Corporate Infographic</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Clear chart summarizing eight key products/features with clean icons for platform innovation.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Performance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 9: YouTube Thumbnail Design -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 9: Advocacy Campaign"
+                     data-discipline="Video Assets"
+                     data-medium="YouTube"
+                     data-tool="Figma"
+                     data-challenge="Develop a high-contrast, attention-grabbing advocacy graphic for a global campaign to highlight female empowerment."
+                     data-solution="I utilized symbolic imagery and a powerful color story to communicate a message of strength. Using Figma's auto-layout, I ensured the branding remained consistent while maximizing the click-through rate for the campaign's calls to action."
+                     data-impact="Consistent thumbnail branding led to a significant increase in subscriber click-through rate."
+                     data-image="SWEGirlChild.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="SWEGirlChild.jpeg" 
+                                 alt="Screenshot of Project Nine"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Advocacy Campaign</span>
+                                <span class="text-sm">International Day of the Girl Child</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Social Media Advocacy Campaign</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Bold graphic using symbolic imagery and color to highlight global female empowerment.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Figma</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">CTR Focus</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project Card 10: Restaurant Menu Design -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 10: Modern Restaurant Menu"
+                     data-discipline="Layout & Print"
+                     data-medium="Print Menu"
+                     data-tool="Canva"
+                     data-challenge="Redesign a restaurant's menu to be more legible and visually appetizing while remaining print-friendly."
+                     data-solution="I  developed a structured layout centered on high-contrast typography and appetizing spatial arrangement. The final artwork utilized a clear sectioning strategy to improve the customer experience and facilitate a faster ordering flow."
+                     data-impact="Improved customer experience and easier ordering flow."
+                     data-image="Kravenes.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="Kravenes.jpeg" 
+                                 alt="Screenshot of Project Ten"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Print Layout</span>
+                                <span class="text-sm">Restaurant Menu</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Restaurant Menu Design</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Creating structured and appetizing layouts for print-based hospitality needs.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Typography</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 11: Sticker Sheet Design -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 11: Brand Sticker Sheet"
+                     data-discipline="Merchandise & Swag"
+                     data-medium="Die-Cut Stickers"
+                     data-tool="Figma"
+                     data-challenge="Design a set of professional stickers and promotional spotlight flyers for conference giveaways and speaker introductions."
+                     data-solution="Created high-resolution vector artwork with clear outlines, ensuring compatibility with major sticker printing services for kiss-cut and die-cut formats."
+                     data-impact="I created high-resolution vector artwork in Figma, focusing on bold typography that highlights credentials. The design emphasized professional 'Speaker Spotlight' frames that increased brand visibility and event attendance."
+                     data-image="SWEInnovSp.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="SWEInnovSp.jpeg" 
+                                 alt="Screenshot of Project Eleven"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Event Speaker Spotlight</span>
+                                <span class="text-sm">'Hacking Innovation' Webinar</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Event Speaker Highlight</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Professional flyer emphasizing speaker credentials and clear event details for maximum attendance.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Figma</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Vector Art</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 12: Internal Report Visualization -->
+                <div class="card-soft p-6 group shine-parent"
+                     data-project="Project 12: Seasonal Content"
+                     data-discipline="Information Design"
+                     data-medium="Internal Reports"
+                     data-tool="Canva, Excel"
+                     data-challenge="Transform monthly greetings into easily digestible visual posts for social media to welcome new seasons and community updates."
+                     data-solution="
+I implemented a tech-inspired aesthetic with elegant typography to create a modern, welcoming feel. By focusing on 'Key Takeaways' rather than raw data, I improved the speed of comprehension and community engagement on social platforms."
+                     data-impact="Improved clarity and speed of data comprehension for executive team meetings."
+                     data-image="SWEOct.jpeg"
+                     data-link="#">
+                    <div class="cursor-pointer" onclick="openProjectModal(this)">
+                        <div class="project-image-container mb-6">
+                            <img src="SWEOct.jpeg" 
+                                 alt="Screenshot of Project Twelve"
+                                 class="project-image w-full h-auto aspect-video object-cover">
+                            <div class="project-overlay">
+                                <span class="text-xl font-bold">Seasonal Content</span>
+                                <span class="text-sm">Hello October' Social Media Post</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Social Media Monthly Greeting</h3>
+                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">Dynamic, tech-inspired visual with elegant typography for a modern monthly welcome.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-sky-100 text-sky-700 text-xs font-medium px-3 py-1 rounded-full">Canva</span>
+                            <span class="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full">Data Clarity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Extended Projects Section -->
+
+            <!-- See More Button -->
+            <div class="text-center mt-12">
+                <button id="toggleProjectsBtn" class="btn-outline font-bold py-3 px-10 text-lg transition duration-300 inline-flex items-center gap-2">
+                    <span id="buttonText">See More Work</span>
+                    <div id="chevron-down-icon"></div>
+                </button>
+            </div>
+        </section>
+
+                <!-- Tools Section -->
+        <section id="tools" class="py-16">
+            <h2 class="section-header text-4xl mb-12 text-center">Tools & Expertise</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center space-x-3">
+                    <span class="text-2xl text-red-500">Cv</span>
+                    <span class="font-medium">Canva</span>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center space-x-3">
+                    <span class="text-2xl text-purple-600">Ai</span>
+                    <span class="font-medium">Illustrator</span>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center space-x-3">
+                    <span class="text-2xl text-pink-500">Id</span>
+                    <span class="font-medium">InDesign</span>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-md flex items-center space-x-3">
+                    <span class="text-2xl text-orange-500">Fg</span>
+                    <span class="font-medium">Figma</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-24 md:py-32 scroll-animate">
+            <h2 class="text-4xl font-bold text-center mb-16 text-gray-900">
+                The <span class="text-gradient">Creative Toolkit</span>
+            </h2>
+            <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Skill Category 1: Digital & Social Graphics -->
+                <div class="card-soft p-6 text-center">
+                    <div id="skill-icon-illustrate" class="skill-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Digital & Social</h3>
+                    <ul class="text-gray-600">
+                        <li>Figma</li>
+                        <li>Canva</li>
+                        <li>Social Media Ads</li>
+                        <li>Web Banners</li>
+                    </ul>
+                </div>
+                <!-- Skill Category 2: Print-Ready Assets -->
+                <div class="card-soft p-6 text-center">
+                    <div id="skill-icon-branding" class="skill-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Print-Ready Assets</h3>
+                    <ul class="text-gray-600">
+                        <li>Flyer & Poster Design</li>
+                        <li>Resolution Optimization</li>
+                        </ul>
+                </div>
+                <!-- Skill Category 3: Visual Retouching -->
+                <div class="card-soft p-6 text-center">
+                    <div id="skill-icon-motion" class="skill-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Visual Retouching</h3>
+                    <ul class="text-gray-600">
+                        <li>Basic Photo Editing</li>
+                        <li>Image Cropping</li>
+                        <li>Background Removal</li>
+                        <li>Asset Sizing/Exporting</li>
+                    </ul>
+                </div>
+                <!-- Skill Category 4: Template & Workflow -->
+                <div class="card-soft p-6 text-center">
+                    <div id="skill-icon-web" class="skill-icon mx-auto mb-4"></div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">Template & Workflow</h3>
+                    <ul class="text-gray-600">
+                        <li>Figma Components</li>
+                        <li>Canva Templates</li>
+                        <li>Design Systems (Basic)</li>
+                        <li>Process Documentation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hire Me CTA Section -->
+        <section id="hire-me" class="py-24 md:py-32 scroll-animate">
+            <div class="cta-section max-w-4xl mx-auto shine-parent">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Ready for a Visual Transformation?
+                </h2>
+                <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                    Let's collaborate on your next brand identity, editorial project, or visual campaign. Great design starts with a conversation.
+                </p>
+                <a href="#contact" class="btn-primary font-bold py-3 px-10 text-lg transition duration-300">
+                    Get a Quote
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 md:py-32 scroll-animate">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-4xl font-bold mb-4 text-gray-900">
+                    Let's <span class="text-gradient">Collaborate</span>
+                </h2>
+                <p class="text-lg text-gray-700 mb-12">
+                    Describe your project needs below. I look forward to bringing your vision to life.
+                </p>
+                
+                <div class="card-soft p-8 md:p-12">
+                    <form id="contactForm" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-left text-gray-700 mb-2">Name</label>
+                                <input type="text" id="name" name="name" required
+                                       class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg p-3 focus:border-sky-400 focus:ring-sky-400 transition duration-300">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-left text-gray-700 mb-2">Email</label>
+                                <input type="email" id="email" name="email" required
+                                       class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg p-3 focus:border-sky-400 focus:ring-sky-400 transition duration-300">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="projectType" class="block text-left text-gray-700 mb-2">Project Type</label>
+                            <select id="projectType" name="projectType" required
+                                    class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg p-3 focus:border-sky-400 focus:ring-sky-400 transition duration-300 appearance-none">
+                                <option value="" disabled selected>Select a service...</option>
+                                <option value="branding">Flyer, Poster, or Print Design</option>
+                                <option value="editorial">Social Media Graphics & Ads</option>
+                                <option value="motion">E-Book or Document Layout</option>
+                                <option value="illustration">Template & Workflow Setup</option>
+                                <option value="other">Other Visual Design</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-left text-gray-700 mb-2">Project Brief / Details</label>
+                            <textarea id="message" name="message" rows="5" required
+                                      class="w-full bg-white border border-gray-300 text-gray-800 rounded-lg p-3 focus:border-sky-400 focus:ring-sky-400 transition duration-300"></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn-primary font-bold py-3 px-10 text-lg transition duration-300 w-full sm:w-auto shine-parent">
+                                Send Brief
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 mt-24">
+        <div class="container mx-auto max-w-7xl px-6 py-8 flex flex-col sm:flex-row justify-between items-center">
+            <p class="text-gray-500">
+                &copy; <span id="currentYear"></span> Wiqoyah, Creative Design.
+            </p>
+            <div class="flex space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="text-gray-500 hover:text-sky-500 transition duration-300" id="dribbble-icon"></a>
+                <a href="#" class="text-gray-500 hover:text-sky-500 transition duration-300" id="behance-icon"></a>
+                <a href="#" class="text-gray-500 hover:text-sky-500 transition duration-300" id="instagram-icon"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- React and Lucide Icons Script -->
+    <script type="text/babel">
+        const e = React.createElement;
+
+        function App() {
+            // Helper to render an icon
+            const renderIcon = (iconName, props = {}) => {
+                if (!lucide[iconName]) {
+                    console.warn(`Icon ${iconName} not found in lucide library.`);
+                    return null;
+                }
+                return e(lucide[iconName], {
+                    color: "currentColor",
+                    size: 24,
+                    ...props
+                });
+            };
+
+            // Icons for the Graphics Designer Theme
+            const icons = {
+                'menu-icon-open': renderIcon('Menu'),
+                'menu-icon-close': renderIcon('X'),
+                'download-icon': renderIcon('Download', { size: 20, className: 'inline-block' }),
+                
+                // Graphics Designer Skills Icons (Updated for Canva/Figma focus)
+                'skill-icon-illustrate': renderIcon('Megaphone', { size: 40, className: 'text-sky-500' }), // Digital & Social
+                'skill-icon-branding': renderIcon('Printer', { size: 40, className: 'text-sky-500' }), // Print-Ready Assets
+                'skill-icon-motion': renderIcon('Image', { size: 40, className: 'text-sky-500' }), // Visual Retouching
+                'skill-icon-web': renderIcon('Switches', { size: 40, className: 'text-sky-500' }), // Template & Workflow
+
+                // Social Icons (Swapped to Dribbble/Behance/Instagram)
+                'dribbble-icon': renderIcon('Dribbble'),
+                'behance-icon': renderIcon('Maximize'), // Using Maximize as a stand-in for Behance, as it's not in Lucide
+                'instagram-icon': renderIcon('Instagram'),
+                
+                'modal-icon-success': renderIcon('CheckCircle', { size: 60, className: 'text-sky-500' }),
+                'scroll-down-icon': renderIcon('ArrowDownCircle', { size: 32 }),
+                'modal-link-icon': renderIcon('ArrowRight', { size: 20, className: 'inline-block' }),
+                'chevron-down-icon': renderIcon('ChevronDown', { size: 20, className: 'inline-block transition-transform duration-300' }),
+            };
+
+            // Mount icons to their containers
+            React.useEffect(() => {
+                for (const [id, icon] of Object.entries(icons)) {
+                    const container = document.getElementById(id);
+                    if (container && icon) {
+                        ReactDOM.createRoot(container).render(icon);
+                    }
+                }
+            }, []);
+
+            return null; // This component is just for rendering icons
+        }
+
+        ReactDOM.createRoot(document.createElement('div')).render(e(App));
+    </script>
+
+    <!-- Page Interaction Script -->
+    <script>
+        // Global utility to open the project modal
+        function openProjectModal(clickedElement) {
+
+            // FIX: Find the closest parent div that actually contains the data attributes
+            const element = clickedElement.closest('[data-project]'); 
+    
+            if (!element) return; // Safety check
+
+            const modal = document.getElementById('projectModal');
+            document.getElementById('modalTitle').textContent = element.dataset.project;
+            document.getElementById('modalRole').textContent = `Discipline: ${element.dataset.discipline}`;
+            document.getElementById('modalMedium').textContent = `Medium: ${element.dataset.medium}`;
+            document.getElementById('modalTool').textContent = `Tool: ${element.dataset.tool}`;
+            document.getElementById('modalChallenge').textContent = element.dataset.challenge;
+            document.getElementById('modalSolution').innerHTML = `${element.dataset.solution}
+                <span class="font-bold text-sky-500 block mt-2">${element.dataset.impact}</span>
+            `;
+            document.getElementById('modalImage').src = element.dataset.image;
+            document.getElementById('modalLink').href = element.dataset.link;
+            
+            modal.classList.add('show');
+        }
+
+        // Global utility to close any modal
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('show');
+        }
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIconOpen = document.getElementById('menu-icon-open');
+            const menuIconClose = document.getElementById('menu-icon-close');
+            
+            mobileMenuBtn.addEventListener('click', () => {
+                const isOpen = mobileMenu.classList.contains('-translate-x-full');
+                if (isOpen) {
+                    mobileMenu.classList.remove('-translate-x-full');
+                    menuIconOpen.classList.add('hidden');
+                    menuIconClose.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('-translate-x-full');
+                    menuIconOpen.classList.remove('hidden');
+                    menuIconClose.classList.add('hidden');
+                }
+            });
+
+            // Magic Dust Cursor Effect
+            const dots = [];
+            const dotColors = ['#38bdf8', '#7dd3fc', '#0ea5e9']; // sky-400, sky-300, sky-500
+
+            window.addEventListener('mousemove', (e) => {
+                for (let i = 0; i < 2; i++) { // Fewer dots for a softer feel
+                    const dot = document.createElement('div');
+                    dot.className = 'magic-dust';
+                    document.body.appendChild(dot);
+                    
+                    const size = Math.random() * 5 + 3; // 3px to 8px
+                    dot.style.width = `${size}px`;
+                    dot.style.height = `${size}px`;
+                    
+                    const color = dotColors[Math.floor(Math.random() * dotColors.length)];
+                    dot.style.setProperty('--magic-color', color);
+                    
+                    const x = e.clientX + (Math.random() * 10 - 5); // Slight Jitter
+                    const y = e.clientY + (Math.random() * 10 - 5);
+                    
+                    dot.style.left = `${x}px`;
+                    dot.style.top = `${y}px`;
+                    
+                    // Animate
+                    requestAnimationFrame(() => {
+                        dot.style.opacity = '1';
+                        dot.style.transform = 'scale(1.2)';
+                    });
+
+                    // Fade out and remove
+                    setTimeout(() => {
+                        requestAnimationFrame(() => {
+                            dot.style.opacity = '0';
+                            dot.style.transform = 'scale(0.5)';
+                        });
+                        setTimeout(() => {
+                            if (dot.parentNode) {
+                                dot.parentNode.removeChild(dot);
+                            }
+                        }, 500);
+                    }, 100 + Math.random() * 300); // Slightly longer life
+                }
+            });
+
+
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            const successModal = document.getElementById('successModal');
+
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+                
+                // Show modal
+                successModal.classList.add('show');
+                
+                // Clear form
+                contactForm.reset();
+            });
+
+            // Close modal by clicking outside
+            successModal.addEventListener('click', (e) => {
+                if (e.target === successModal) {
+                    closeModal('successModal');
+                }
+            });
+            document.getElementById('projectModal').addEventListener('click', (e) => {
+                if (e.target === document.getElementById('projectModal')) {
+                    closeModal('projectModal');
+                }
+            });
+            
+            // Portfolio Expansion Logic
+            const toggleProjectsBtn = document.getElementById('toggleProjectsBtn');
+            const moreProjects = document.getElementById('moreProjects');
+            const buttonText = document.getElementById('buttonText');
+            const chevronIconContainer = document.getElementById('chevron-down-icon');
+
+            // Function to manually update the chevron icon rotation
+            function updateChevronRotation(isExpanded) {
+                const chevron = chevronIconContainer.querySelector('svg');
+                if (chevron) {
+                    if (isExpanded) {
+                        chevron.style.transform = 'rotate(180deg)';
+                    } else {
+                        chevron.style.transform = 'rotate(0deg)';
+                    }
+                }
+            }
+
+            toggleProjectsBtn.addEventListener('click', () => {
+                const isExpanded = moreProjects.classList.contains('expanded');
+                
+                if (isExpanded) {
+                    // Collapse
+                    moreProjects.classList.remove('expanded');
+                    buttonText.textContent = 'See More Work';
+                    updateChevronRotation(false);
+                } else {
+                    // Expand
+                    moreProjects.classList.add('expanded');
+                    buttonText.textContent = 'Show Less Work';
+                    updateChevronRotation(true);
+                    
+                    // Smooth scroll to the expanded section
+                    setTimeout(() => {
+                        moreProjects.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 50); 
+                }
+            });
+            
+            // Scroll Animation Observer (Element visibility detection)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            });
+
+            document.querySelectorAll('.scroll-animate').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Header Scroll Effect
+            const header = document.getElementById('mainHeader');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            });
+            
+        });
+    </script>
+</body>
+</html>

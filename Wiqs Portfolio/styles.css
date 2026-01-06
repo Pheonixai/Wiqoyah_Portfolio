@@ -1,0 +1,435 @@
+        /* Custom styles for the magical sky theme */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f9ff; /* Soft Sky Blue BG (sky-50) */
+            color: #334155; /* Dark Slate Text (slate-700) */
+        }
+
+        /* Header Scroll Effect */
+        header {
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .header-scrolled {
+            background-color: rgba(240, 249, 255, 0.95) !important; /* sky-50 with opacity */
+            box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Custom gradient text */
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #0ea5e9); /* sky-400 to sky-500 */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Custom button primary effect */
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px 0 rgba(56, 189, 248, 0.3); }
+            50% { box-shadow: 0 0 20px 10px rgba(56, 189, 248, 0.5); }
+            100% { box-shadow: 0 0 10px 0 rgba(56, 189, 248, 0.3); }
+        }
+
+        .btn-primary {
+            background-color: #38bdf8; /* sky-400 */
+            color: #ffffff; /* white */
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.4); /* Sky blue shadow */
+            border-radius: 9999px; /* pill shape */
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 6px 20px 0 rgba(56, 189, 248, 0.6);
+            transform: translateY(-2px);
+            /* animation: pulse-glow 1.5s infinite; */ /* Disable infinite pulse on hover for cleaner look */
+        }
+
+        /* Custom secondary button */
+        .btn-outline {
+            border: 2px solid #38bdf8; /* sky-400 */
+            color: #38bdf8;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-radius: 9999px; /* pill shape */
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(56, 189, 248, 0.1);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+            color: #0ea5e9; /* sky-500 */
+        }
+        
+        /* Soft card effect */
+        .card-soft {
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            border-radius: 1.5rem; /* 24px */
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        .blue-box {
+            border: 10px solid #0ea5e9;
+        }
+        .card-soft:hover {
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.07), 0 8px 10px -4px rgba(0, 0, 0, 0.04);
+            transform: translateY(-5px);
+        }
+
+        /* Skill Icon Pop (updated for design tools) */
+        .skill-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .card-soft:hover .skill-icon {
+            transform: scale(1.15) rotate(-5deg); /* Softer rotation for design theme */
+        }
+
+        /* Project Card Hover Enhancements */
+        .card-soft .project-image-container {
+            overflow: hidden; /* Keep scaled image inside rounded corners */
+            border-radius: 1rem; /* 16px */
+            position: relative;
+        }
+
+        .card-soft:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-image {
+            transition: transform 0.4s ease;
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(56, 189, 248, 0.8); /* Sky-400 with opacity */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+            color: white;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .card-soft:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        /* Shine Effect */
+        .shine-parent {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shine-parent:hover::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 75%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            animation: shine 1s ease-in-out;
+        }
+
+        @keyframes shine {
+            from { left: -100%; }
+            to { left: 150%; }
+        }
+
+
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Portfolio Expansion Transition */
+        #moreProjects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out;
+            opacity: 0;
+        }
+
+        #moreProjects.expanded {
+            max-height: 4000px; /* Large enough value to show all projects */
+            opacity: 1;
+            margin-top: 2rem;
+        }
+
+
+        /* Scroll Down Arrow */
+        .scroll-down-arrow {
+            position: absolute;
+            bottom: 2rem; /* 32px */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translate(-50%, 0);
+            }
+            40% {
+                transform: translate(-50%, -15px);
+            }
+            60% {
+                transform: translate(-50%, -5px);
+            }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(to right, #e0f2fe, #bae6fd); /* sky-100 to sky-200 */
+            border-radius: 1.5rem; /* 24px */
+            padding: 3rem 2rem; /* 48px 32px */
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.1), 0 4px 6px -2px rgba(56, 189, 248, 0.05);
+        }
+
+        /* Magic Dust Cursor Effect */
+        .magic-dust {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            background: radial-gradient(circle, var(--magic-color, #38bdf8) 0%, transparent 70%);
+            filter: blur(1px); /* Soften the dust */
+        }
+        
+        /* Magical Background Orbs */
+        .hero-bg-orbs {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            opacity: 0.6; /* Softer opacity */
+        }
+
+        .hero-bg-orbs li {
+            position: absolute;
+            display: block;
+            list-style: none;
+            width: 20px;
+            height: 20px;
+            background: rgba(56, 189, 248, 0.15);
+            border-radius: 50%;
+            animation: float-up 25s linear infinite;
+            bottom: -150px;
+            filter: blur(2px); /* Soften the orbs */
+        }
+
+        .hero-bg-orbs li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
+        .hero-bg-orbs li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
+        .hero-bg-orbs li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
+        .hero-bg-orbs li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
+        .hero-bg-orbs li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
+        .hero-bg-orbs li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(56, 189, 248, 0.1); }
+        .hero-bg-orbs li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; background: rgba(56, 189, 248, 0.05); }
+        .hero-bg-orbs li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
+        .hero-bg-orbs li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
+        .hero-bg-orbs li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; background: rgba(56, 189, 248, 0.1); }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background-color: #f0f9ff; /* sky-50 */
+            margin: auto;
+            padding: 30px;
+            border-radius: 1.5rem;
+            max-width: 800px;
+            position: relative;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease-out;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal.show .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #38bdf8; /* sky-400 */
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Custom scrollbar (WebKit browsers) */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e0f2fe; /* sky-100 */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #38bdf8; /* sky-400 */
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9; /* sky-500 */
+        }
+
+/* Mobile Devices (max-width: 768px) */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.75rem; }
+            
+            .cta-section {
+                padding: 2rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .modal-content {
+                width: 95%;
+                padding: 20px;
+                margin: 10px;
+            }
+
+            #moreProjects {
+                grid-template-columns: 1fr; /* Stack cards on mobile */
+                gap: 1.5rem;
+            }
+
+            .scroll-down-arrow {
+                bottom: 1rem;
+            }
+        }
+
+        /* Small Phones (max-width: 480px) */
+        @media (max-width: 480px) {
+            .btn-primary, .btn-outline {
+                width: 100%; /* Full width buttons for better touch targets */
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+            
+            .card-soft {
+                padding: 1rem;
+                border-radius: 1rem;
+            }
+        }
+
+/* --- Responsive Adjustments for Mobile Viewport --- */
+
+        @media (max-width: 768px) {
+            body {
+                /* Ensure background is clean and centered */
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding: 0;
+            }
+
+            /* Container for the mobile screen effect */
+            .main-container {
+                width: 100%;
+                max-width: 450px; /* Mimics the narrow mobile view in your image */
+                padding: 40px 20px;
+                text-align: center; /* Center all text as seen in image */
+                margin: 0 auto;
+            }
+
+            /* Headline sizing from image */
+            h1 {
+                font-size: 2.5rem;
+                line-height: 1.1;
+                margin-bottom: 1.5rem;
+            }
+
+            /* Paragraph text sizing */
+            p {
+                font-size: 1rem;
+                line-height: 1.6;
+                padding: 0 10px;
+                margin-bottom: 2rem;
+            }
+
+            /* Button Stacking Logic */
+            .btn-primary, .btn-outline {
+                display: block; /* Force buttons to stack */
+                width: 100%;    /* Full width of the container */
+                margin: 12px 0; /* Add vertical spacing between buttons */
+                padding: 14px 0; /* Taller touch targets */
+                box-sizing: border-box;
+            }
+
+            /* Creative Philosophy Section */
+            .philosophy-section {
+                margin-top: 60px;
+            }
+
+            .philosophy-image {
+                width: 100%;
+                border-radius: 1.5rem;
+                margin-top: 20px;
+            }
+
+            /* Adjust Orbs for Mobile */
+            .hero-bg-orbs li {
+                opacity: 0.4; /* Fade them more so they don't distract from text */
+            }
+        }
