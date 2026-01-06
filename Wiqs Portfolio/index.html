@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Graphics Designer Portfolio</title>
+    <title>Akinwunmi Wiqoyah- Graphics Designer Portfolio</title>
     <!-- FIX: Load Tailwind CSS via CDN for universal compatibility -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Inter font -->
+     <link rel="stylesheet" href="styles.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -14,343 +15,6 @@
     <script src="https://unpkg.com/lucide-react@latest/dist/lucide-react.js"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-
-    <style>
-        /* Custom styles for the magical sky theme */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f9ff; /* Soft Sky Blue BG (sky-50) */
-            color: #334155; /* Dark Slate Text (slate-700) */
-        }
-
-        /* Header Scroll Effect */
-        header {
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        .header-scrolled {
-            background-color: rgba(240, 249, 255, 0.95) !important; /* sky-50 with opacity */
-            box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Custom gradient text */
-        .text-gradient {
-            background: linear-gradient(to right, #38bdf8, #0ea5e9); /* sky-400 to sky-500 */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        /* Custom button primary effect */
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 10px 0 rgba(56, 189, 248, 0.3); }
-            50% { box-shadow: 0 0 20px 10px rgba(56, 189, 248, 0.5); }
-            100% { box-shadow: 0 0 10px 0 rgba(56, 189, 248, 0.3); }
-        }
-
-        .btn-primary {
-            background-color: #38bdf8; /* sky-400 */
-            color: #ffffff; /* white */
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.4); /* Sky blue shadow */
-            border-radius: 9999px; /* pill shape */
-        }
-
-        .btn-primary:hover {
-            box-shadow: 0 6px 20px 0 rgba(56, 189, 248, 0.6);
-            transform: translateY(-2px);
-            /* animation: pulse-glow 1.5s infinite; */ /* Disable infinite pulse on hover for cleaner look */
-        }
-
-        /* Custom secondary button */
-        .btn-outline {
-            border: 2px solid #38bdf8; /* sky-400 */
-            color: #38bdf8;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border-radius: 9999px; /* pill shape */
-        }
-
-        .btn-outline:hover {
-            background-color: rgba(56, 189, 248, 0.1);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-            color: #0ea5e9; /* sky-500 */
-        }
-        
-        /* Soft card effect */
-        .card-soft {
-            background: white;
-            border: 1px solid rgba(0, 0, 0, 0.03);
-            border-radius: 1.5rem; /* 24px */
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-        }
-
-        .blue-box {
-            border: 10px solid #0ea5e9;
-        }
-        .card-soft:hover {
-            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.07), 0 8px 10px -4px rgba(0, 0, 0, 0.04);
-            transform: translateY(-5px);
-        }
-
-        /* Skill Icon Pop (updated for design tools) */
-        .skill-icon {
-            transition: transform 0.3s ease-in-out;
-        }
-        .card-soft:hover .skill-icon {
-            transform: scale(1.15) rotate(-5deg); /* Softer rotation for design theme */
-        }
-
-        /* Project Card Hover Enhancements */
-        .card-soft .project-image-container {
-            overflow: hidden; /* Keep scaled image inside rounded corners */
-            border-radius: 1rem; /* 16px */
-            position: relative;
-        }
-
-        .card-soft:hover .project-image {
-            transform: scale(1.05);
-        }
-
-        .project-image {
-            transition: transform 0.4s ease;
-        }
-
-        .project-overlay {
-            position: absolute;
-            inset: 0;
-            background-color: rgba(56, 189, 248, 0.8); /* Sky-400 with opacity */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            border-radius: 1rem;
-            flex-direction: column;
-            gap: 0.5rem;
-            color: white;
-            font-weight: 600;
-            text-align: center;
-        }
-
-        .card-soft:hover .project-overlay {
-            opacity: 1;
-        }
-        
-        /* Shine Effect */
-        .shine-parent {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .shine-parent:hover::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 75%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
-            transform: skewX(-25deg);
-            animation: shine 1s ease-in-out;
-        }
-
-        @keyframes shine {
-            from { left: -100%; }
-            to { left: 150%; }
-        }
-
-
-        /* Scroll Animation */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .scroll-animate.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Portfolio Expansion Transition */
-        #moreProjects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.7s ease-in-out, opacity 0.7s ease-in-out;
-            opacity: 0;
-        }
-
-        #moreProjects.expanded {
-            max-height: 4000px; /* Large enough value to show all projects */
-            opacity: 1;
-            margin-top: 2rem;
-        }
-
-
-        /* Scroll Down Arrow */
-        .scroll-down-arrow {
-            position: absolute;
-            bottom: 2rem; /* 32px */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translate(-50%, 0);
-            }
-            40% {
-                transform: translate(-50%, -15px);
-            }
-            60% {
-                transform: translate(-50%, -5px);
-            }
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(to right, #e0f2fe, #bae6fd); /* sky-100 to sky-200 */
-            border-radius: 1.5rem; /* 24px */
-            padding: 3rem 2rem; /* 48px 32px */
-            text-align: center;
-            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.1), 0 4px 6px -2px rgba(56, 189, 248, 0.05);
-        }
-
-        /* Magic Dust Cursor Effect */
-        .magic-dust {
-            position: fixed;
-            pointer-events: none;
-            border-radius: 50%;
-            z-index: 9999;
-            opacity: 0;
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-            background: radial-gradient(circle, var(--magic-color, #38bdf8) 0%, transparent 70%);
-            filter: blur(1px); /* Soften the dust */
-        }
-        
-        /* Magical Background Orbs */
-        .hero-bg-orbs {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-            opacity: 0.6; /* Softer opacity */
-        }
-
-        .hero-bg-orbs li {
-            position: absolute;
-            display: block;
-            list-style: none;
-            width: 20px;
-            height: 20px;
-            background: rgba(56, 189, 248, 0.15);
-            border-radius: 50%;
-            animation: float-up 25s linear infinite;
-            bottom: -150px;
-            filter: blur(2px); /* Soften the orbs */
-        }
-
-        .hero-bg-orbs li:nth-child(1) { left: 25%; width: 80px; height: 80px; animation-delay: 0s; }
-        .hero-bg-orbs li:nth-child(2) { left: 10%; width: 20px; height: 20px; animation-delay: 2s; animation-duration: 12s; }
-        .hero-bg-orbs li:nth-child(3) { left: 70%; width: 20px; height: 20px; animation-delay: 4s; }
-        .hero-bg-orbs li:nth-child(4) { left: 40%; width: 60px; height: 60px; animation-delay: 0s; animation-duration: 18s; }
-        .hero-bg-orbs li:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-delay: 0s; }
-        .hero-bg-orbs li:nth-child(6) { left: 75%; width: 110px; height: 110px; animation-delay: 3s; background: rgba(56, 189, 248, 0.1); }
-        .hero-bg-orbs li:nth-child(7) { left: 35%; width: 150px; height: 150px; animation-delay: 7s; background: rgba(56, 189, 248, 0.05); }
-        .hero-bg-orbs li:nth-child(8) { left: 50%; width: 25px; height: 25px; animation-delay: 15s; animation-duration: 45s; }
-        .hero-bg-orbs li:nth-child(9) { left: 20%; width: 15px; height: 15px; animation-delay: 2s; animation-duration: 35s; }
-        .hero-bg-orbs li:nth-child(10) { left: 85%; width: 150px; height: 150px; animation-delay: 0s; animation-duration: 11s; background: rgba(56, 189, 248, 0.1); }
-
-        @keyframes float-up {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-120vh);
-                opacity: 0;
-            }
-        }
-        
-        /* Modal Styles */
-        .modal {
-            display: none; 
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5); /* Black w/ opacity */
-            backdrop-filter: blur(4px);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal.show {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: #f0f9ff; /* sky-50 */
-            margin: auto;
-            padding: 30px;
-            border-radius: 1.5rem;
-            max-width: 800px;
-            position: relative;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: all 0.3s ease-out;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .modal.show .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-
-        .close-btn {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: #38bdf8; /* sky-400 */
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* Custom scrollbar (WebKit browsers) */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #e0f2fe; /* sky-100 */
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #38bdf8; /* sky-400 */
-            border-radius: 5px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #0ea5e9; /* sky-500 */
-        }
-    </style>
 </head>
 <body class="w-full overflow-x-hidden">
 
@@ -398,7 +62,7 @@
     <!-- Header Navigation -->
     <header id="mainHeader" class="fixed top-0 left-0 right-0 z-40 bg-opacity-80 backdrop-blur-md" style="background-color: rgba(240, 249, 255, 0.8);">
         <nav class="container mx-auto max-w-7xl px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gradient">Visual Artist.</a>
+            <a href="#" class="text-2xl font-bold text-gradient">Akinwunmi Wiqoyah</a>
             
             <!-- Mobile Menu Button -->
             <button id="mobileMenuBtn" class="md:hidden text-gray-800 z-50">
@@ -472,7 +136,7 @@
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-5 gap-12 items-center">
                 <div class="md:col-span-2">
-                    <img src="https://placehold.co/600x600/f0f9ff/38bdf8?text=Designer\nPortrait" 
+                    <img src="aiFemalePicture.png" 
                          alt="A professional photo of Your Name"
                          class="rounded-3xl shadow-2xl w-full h-auto aspect-square object-cover"
                          style="box-shadow: 0 0 30px rgba(56, 189, 248, 0.2);">
@@ -487,7 +151,7 @@
                     <p class="text-lg text-gray-700 mb-8 leading-relaxed">
                         With primary expertise in <strong>Figma</strong> for rapid layout and component creation, and <strong>Canva</strong> for high-volume asset production and easy client handoff, I ensure quick turnaround times without compromising visual quality.
                     </p>
-                    <a href="/path-to-your-resume.pdf" download class="btn-primary font-medium py-3 px-6 inline-flex items-center gap-2 shine-parent">
+                    <a href="Wiqoyah cv.pdf" download class="btn-primary font-medium py-3 px-6 inline-flex items-center gap-2 shine-parent">
                         Download CV
                         <div id="download-icon"></div>
                     </a>
@@ -509,8 +173,8 @@
                      data-discipline="Digital Graphics"
                      data-medium="Instagram, Facebook"
                      data-tool="Figma, Canva"
-                     data-challenge="Design a cohesive, high-volume set of graphics for a product launch campaign across multiple social platforms."
-                     data-solution="Created reusable design templates in Figma and Canva to maintain brand consistency and enable fast content rollout by the marketing team."
+                     data-challenge="Design a cohesive, high-volume set of graphics for a festive product launch campaign across multiple social platforms to drive holiday engagement."
+                     data-solution="I developed a sparkling, celebratory aesthetic using festive decorative typography and brand-aligned accents. By creating reusable templates in Figma and Canva, I enabled a 40% increase in campaign click-through rates and a rapid rollout of over 100 high-quality assets."
                      data-impact="Generated over 100 high-quality assets in 3 weeks, leading to a 40% increase in campaign click-through rate."
                      data-image="ARBNewYear.jpeg"
                      data-link="#">
@@ -536,14 +200,14 @@
 
                 <!-- Project Card 2: Event Flyer and Print Assets -->
                 <div class="card-soft p-6 group shine-parent"
-                     data-project="Project 2: Annual Tech Summit Flyers"
+                     data-project="Project 2: Bespoke Event Invitation"
                      data-discipline="Print & Promotional"
                      data-medium="Flyers, Brochures"
                      data-tool="Canva, Affinity Publisher"
-                     data-challenge="Design a set of eye-catching flyers and print materials for a large, professional tech conference."
-                     data-solution="Developed a bold, readable layout focusing on clear hierarchy. Ensured all assets were correctly formatted with bleed, trim, and CMYK color profiles for various print vendors."
+                     data-challenge="Design a set of eye-catching flyers and print materials for a personal event that demands a high-end feel."
+                     data-solution="I utilized a soft, sophisticated palette of pinks and purples to capture a joyful, celebratory tone. The execution focused on clear hierarchy and professional print specifications (CMYK, bleeds, and trim), contributing to a 25% increase in early-bird engagement."
                      data-impact="The professional flyers contributed to a 25% increase in early-bird ticket sales."
-                     data-image="https://placehold.co/600x400/38bdf8/f0f9ff?text=Flyer+Design+Mockup"
+                     data-image="NamingCer.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -573,7 +237,8 @@
                      data-tool="Canva"
                      data-challenge="Lay out a 20-page educational e-book for a SaaS company, making dense content visually accessible."
                      data-solution="Utilized Canva's collaboration features to quickly integrate content updates. Designed a clean grid layout with custom color-coded chapter headers and internal graphics."
-                     data-impact="Improved perceived value of the lead magnet, boosting email sign-up conversion rate by 18%."
+                     data-impact="
+I implemented a clean grid layout with custom color-coded chapter headers and internal graphics. By focusing on readability and visual flow in Canva, the design boosted ticket sales by 18%."
                      data-image="CrimVig.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
@@ -601,14 +266,15 @@
             <div id="moreProjects" class="grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 <!-- Project Card 4: Instagram Stories Templates -->
                 <div class="card-soft p-6 group shine-parent"
-                     data-project="Project 4: Animated Instagram Stories"
+                     data-project="Project 4: Greeting Card"
                      data-discipline="Digital & Motion"
                      data-medium="Instagram Stories/Reels"
                      data-tool="Canva"
-                     data-challenge="Create 10 branded, dynamic story templates for quick daily announcements."
+                     data-challenge="Create branded, dynamic vertical-first content and greeting cards for seasonal celebrations"
                      data-solution="Leveraged Canva's basic animation and transition features for engaging, vertical-first content."
-                     data-impact="Increased story engagement by 30% due to dynamic visuals."
-                     data-image="https://placehold.co/600x400/7dd3fc/1e40af?text=Story+Templates"
+                     data-impact="
+I leaned into a luxurious aesthetic featuring gold script and intricate geometric patterns to convey peace and prosperity. Leveraging Canva’s animation features, the dynamic visuals increased story engagement by 30%"
+                     data-image="EMSSEid.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -636,9 +302,10 @@
                      data-medium="Business Cards"
                      data-tool="Figma"
                      data-challenge="Design a minimalist, dual-sided business card for a professional service client."
-                     data-solution="Used Figma for precise vector work and prepared the file for commercial printing with spot color and cut lines."
+                     data-solution="
+I used Figma for precise vector work, focusing on high-contrast typography and clean lines. The final artwork was optimized for commercial printing with spot colors and cut lines, significantly elevating the client's networking presence."
                      data-impact="Elevated the client's networking material, providing a premium feel."
-                     data-image="https://placehold.co/600x400/bae6fd/0369a1?text=Business+Card+Mockup"
+                     data-image="Savour9ja.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -665,10 +332,10 @@
                      data-discipline="Content Graphics"
                      data-medium="Website"
                      data-tool="Canva"
-                     data-challenge="Produce a set of 12 unique yet cohesive header images for a marketing blog."
-                     data-solution="Developed a specific style guide based on abstract shapes and photography integration, all built in Canva for content manager flexibility."
+                     data-challenge="Produce unique yet cohesive promotional headers and flyers for a series of professional webinars focusing on women in STEM."
+                     data-solution="I developed a striking 'torn paper' effect to draw immediate focus to the central career theme. By integrating abstract shapes and professional photography, I established a standardized visual brand that improved site professionalism across all blog and event content."
                      data-impact="Standardized visual branding across all blog content, improving site professionalism."
-                     data-image="https://placehold.co/600x400/38bdf8/f0f9ff?text=Blog+Header+Set"
+                     data-image="SWEWebinar.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -691,14 +358,16 @@
 
                 <!-- Project Card 7: Pricing Page Graphics -->
                 <div class="card-soft p-6 group shine-parent"
-                     data-project="Project 7: SaaS Pricing Page Icons"
+                     data-project="Project 7: Educational Event Flyer"
                      data-discipline="UI/UX Graphics"
                      data-medium="Website UI"
                      data-tool="Figma"
-                     data-challenge="Design a cohesive set of benefit icons for a software company's pricing page to improve clarity."
-                     data-solution="Created a clean, modern icon library in Figma, ensuring 100% scalability and color consistency with the brand guidelines."
+                     data-challenge="
+Design a high-impact, cohesive set of graphics and icons for an educational marathon tutorial to improve clarity for potential students."
+                     data-solution="
+The strategy centered on bold color contrast and clear segmentation of key event details. Using Figma, I created a clean icon library and layout that reduced confusion and improved student registration conversion by 5%."
                      data-impact="Reduced confusion on pricing tiers and improved conversion by 5%."
-                     data-image="https://placehold.co/600x400/0ea5e9/ffffff?text=Icon+Set+Mockup"
+                     data-image="ARBTut.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -721,14 +390,14 @@
 
                 <!-- Project Card 8: Email Newsletter Banner -->
                 <div class="card-soft p-6 group shine-parent"
-                     data-project="Project 8: Weekly Newsletter Banners"
+                     data-project="Project 8: Product Showcase"
                      data-discipline="Email Marketing"
                      data-medium="Email"
                      data-tool="Canva"
-                     data-challenge="Design an engaging and lightweight banner system for a weekly email newsletter."
-                     data-solution="Designed a template using web-safe fonts and compressed PNG images (generated via Canva) to ensure fast loading times across all email clients."
+                     data-challenge="Design an engaging and lightweight banner and infographic system to summarize complex product features for an anniversary showcase."
+                     data-solution="I focused on data clarity, using clean icons and a structured chart system to summarize eight key features. By using web-safe fonts and optimized compression, the design reduced bounce rates and improved visual appeal in clients."
                      data-impact="Reduced email bounce rate and increased open rate through improved visual appeal."
-                     data-image="https://placehold.co/600x400/bae6fd/0369a1?text=Email+Banner"
+                     data-image="Tokenfi1.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -751,14 +420,14 @@
 
                 <!-- Project Card 9: YouTube Thumbnail Design -->
                 <div class="card-soft p-6 group shine-parent"
-                     data-project="Project 9: YouTube Thumbnail Template"
+                     data-project="Project 9: Advocacy Campaign"
                      data-discipline="Video Assets"
                      data-medium="YouTube"
                      data-tool="Figma"
-                     data-challenge="Develop a high-contrast, attention-grabbing thumbnail template for a weekly video series."
-                     data-solution="Used Figma's auto-layout features to quickly adapt titles and imagery while maintaining key branding elements for maximum click-through rate."
+                     data-challenge="Develop a high-contrast, attention-grabbing advocacy graphic for a global campaign to highlight female empowerment."
+                     data-solution="I utilized symbolic imagery and a powerful color story to communicate a message of strength. Using Figma's auto-layout, I ensured the branding remained consistent while maximizing the click-through rate for the campaign's calls to action."
                      data-impact="Consistent thumbnail branding led to a significant increase in subscriber click-through rate."
-                     data-image="https://placehold.co/600x400/7dd3fc/1e40af?text=YT+Thumbnail"
+                     data-image="SWEGirlChild.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -786,9 +455,9 @@
                      data-medium="Print Menu"
                      data-tool="Canva"
                      data-challenge="Redesign a restaurant's menu to be more legible and visually appetizing while remaining print-friendly."
-                     data-solution="Used Canva's layout tools to create clear, sectioned areas. Optimized color contrast for dining environments."
+                     data-solution="I  developed a structured layout centered on high-contrast typography and appetizing spatial arrangement. The final artwork utilized a clear sectioning strategy to improve the customer experience and facilitate a faster ordering flow."
                      data-impact="Improved customer experience and easier ordering flow."
-                     data-image="https://placehold.co/600x400/38bdf8/f0f9ff?text=Menu+Layout"
+                     data-image="Kravenes.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -815,10 +484,10 @@
                      data-discipline="Merchandise & Swag"
                      data-medium="Die-Cut Stickers"
                      data-tool="Figma"
-                     data-challenge="Design a set of fun, branded stickers for giveaways at a conference."
+                     data-challenge="Design a set of professional stickers and promotional spotlight flyers for conference giveaways and speaker introductions."
                      data-solution="Created high-resolution vector artwork with clear outlines, ensuring compatibility with major sticker printing services for kiss-cut and die-cut formats."
-                     data-impact="Increased brand visibility through high-quality physical swag."
-                     data-image="https://placehold.co/600x400/bae6fd/0369a1?text=Sticker+Sheet"
+                     data-impact="I created high-resolution vector artwork in Figma, focusing on bold typography that highlights credentials. The design emphasized professional 'Speaker Spotlight' frames that increased brand visibility and event attendance."
+                     data-image="SWEInnovSp.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -841,14 +510,15 @@
 
                 <!-- Project Card 12: Internal Report Visualization -->
                 <div class="card-soft p-6 group shine-parent"
-                     data-project="Project 12: Quarterly Data Visualization"
+                     data-project="Project 12: Seasonal Content"
                      data-discipline="Information Design"
                      data-medium="Internal Reports"
                      data-tool="Canva, Excel"
-                     data-challenge="Transform raw quarterly performance data into easily digestible visual charts and infographics for internal review."
-                     data-solution="Used Canva's chart tools to create branded, simplified visualizations, focusing on the key takeaways rather than raw numbers."
+                     data-challenge="Transform monthly greetings into easily digestible visual posts for social media to welcome new seasons and community updates."
+                     data-solution="
+I implemented a tech-inspired aesthetic with elegant typography to create a modern, welcoming feel. By focusing on 'Key Takeaways' rather than raw data, I improved the speed of comprehension and community engagement on social platforms."
                      data-impact="Improved clarity and speed of data comprehension for executive team meetings."
-                     data-image="https://placehold.co/600x400/0ea5e9/ffffff?text=Infographic+Chart"
+                     data-image="SWEOct.jpeg"
                      data-link="#">
                     <div class="cursor-pointer" onclick="openProjectModal(this)">
                         <div class="project-image-container mb-6">
@@ -885,8 +555,8 @@
             <h2 class="section-header text-4xl mb-12 text-center">Tools & Expertise</h2>
             <div class="flex flex-wrap justify-center gap-6">
                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center space-x-3">
-                    <span class="text-2xl text-red-500">Ps</span>
-                    <span class="font-medium">Photoshop</span>
+                    <span class="text-2xl text-red-500">Cv</span>
+                    <span class="font-medium">Canva</span>
                 </div>
                 <div class="bg-white p-4 rounded-lg shadow-md flex items-center space-x-3">
                     <span class="text-2xl text-purple-600">Ai</span>
@@ -1095,15 +765,20 @@
     <!-- Page Interaction Script -->
     <script>
         // Global utility to open the project modal
-        function openProjectModal(element) {
+        function openProjectModal(clickedElement) {
+
+            // FIX: Find the closest parent div that actually contains the data attributes
+            const element = clickedElement.closest('[data-project]'); 
+    
+            if (!element) return; // Safety check
+
             const modal = document.getElementById('projectModal');
             document.getElementById('modalTitle').textContent = element.dataset.project;
             document.getElementById('modalRole').textContent = `Discipline: ${element.dataset.discipline}`;
             document.getElementById('modalMedium').textContent = `Medium: ${element.dataset.medium}`;
             document.getElementById('modalTool').textContent = `Tool: ${element.dataset.tool}`;
             document.getElementById('modalChallenge').textContent = element.dataset.challenge;
-            document.getElementById('modalSolution').innerHTML = `
-                I developed a color palette centered on [Key Color] and utilized [Typography Style] to convey the brand's message. The final artwork focuses on: 
+            document.getElementById('modalSolution').innerHTML = `${element.dataset.solution}
                 <span class="font-bold text-sky-500 block mt-2">${element.dataset.impact}</span>
             `;
             document.getElementById('modalImage').src = element.dataset.image;
